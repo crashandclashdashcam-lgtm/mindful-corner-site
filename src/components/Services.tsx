@@ -1,222 +1,298 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./ui/card";
+import { Card, CardContent, CardHeader } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { Users, User, Video, Heart, Brain, Smile, Clock, CheckCircle2, TrendingUp } from "lucide-react";
+import { Button } from "./ui/button";
+import { Users, User, Video, Heart, Clock, CheckCircle2, Sparkles, Award, Calendar } from "lucide-react";
+import therapyAbstract from "@/assets/therapy-abstract.jpg";
+
+const scrollToContact = () => {
+  const contactSection = document.getElementById("contact");
+  if (contactSection) {
+    contactSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 const Services = () => {
   const services = [
     {
       icon: User,
-      title: "Psihoterapie individuală",
+      title: "Consultație individuală",
       description:
-        "Sesiuni personalizate pentru a aborda anxietatea, depresia, stresul, trauma și dezvoltarea personală într-un mediu sigur și confidențial.",
+        "Sesiuni personalizate pentru anxietate, depresie, stres și dezvoltare personală. Abordare integrativă adaptată nevoilor tale unice.",
       price: "250",
-      duration: "50 min",
-      badge: "Popular",
-      badgeColor: "bg-primary/10 text-primary",
-      benefits: [
+      duration: "50 minute",
+      highlights: [
         "Evaluare clinică completă",
         "Plan terapeutic personalizat",
-        "Tehnici cognitive și comportamentale",
+        "Tehnici validate științific",
+        "Suport între ședințe"
       ],
-      gradient: "from-primary/5 to-primary/10",
+      badge: "Cel mai popular",
     },
     {
       icon: Users,
       title: "Terapie de cuplu",
       description:
-        "Îmbunătățirea comunicării, rezolvarea conflictelor și consolidarea legăturii emoționale dintre parteneri prin tehnici validate științific.",
-      price: "300",
-      duration: "60 min",
-      badge: "Extins",
-      badgeColor: "bg-secondary/20 text-secondary-foreground",
-      benefits: [
+        "Îmbunătățiți comunicarea, rezolvați conflictele și redescoperă conexiunea emoțională. Pentru relații mai armonioase.",
+      price: "350",
+      duration: "75 minute",
+      highlights: [
         "Comunicare eficientă",
-        "Rezolvare conflicte",
-        "Intimitate emoțională",
+        "Rezolvare sănătoasă a conflictelor",
+        "Reconstruire intimitate",
+        "Exerciții practice pentru acasă"
       ],
-      gradient: "from-secondary/5 to-secondary/10",
+      badge: "Sesiune extinsă",
     },
     {
       icon: Video,
       title: "Consiliere online",
       description:
-        "Acces la servicii psihologice de calitate din confortul casei tale, prin platforme securizate de videoconferință.",
+        "Acces la terapie profesională din confortul casei tale. Platformă securizată, confidențialitate garantată.",
       price: "230",
-      duration: "50 min",
-      badge: "Flexibil",
-      badgeColor: "bg-accent/20 text-accent-foreground",
-      benefits: [
+      duration: "50 minute",
+      highlights: [
+        "Program flexibil 24/7",
         "Acces de oriunde",
-        "Program flexibil",
-        "Platformă securizată",
+        "Platformă GDPR compliant",
+        "Același nivel de profesionalism"
       ],
-      gradient: "from-accent/5 to-accent/10",
+      badge: "Flexibilitate maximă",
     },
     {
       icon: Heart,
       title: "Terapie pentru adolescenți",
       description:
-        "Suport specializat adaptat nevoilor emoționale ale adolescenților, pentru gestionarea anxietății, identității și relațiilor.",
+        "Suport specializat pentru provocările adolescenței. Gestionarea emoțiilor, identitate și relații sociale.",
       price: "230",
-      duration: "45 min",
-      badge: "Specializat",
-      badgeColor: "bg-lavender/20 text-foreground",
-      benefits: [
-        "Adaptată vârstei",
-        "Gestionare emoțională",
-        "Suport parental inclus",
+      duration: "45 minute",
+      highlights: [
+        "Abordare adaptată vârstei",
+        "Dezvoltare identitate",
+        "Management emoțional",
+        "Consultare părinți inclusă"
       ],
-      gradient: "from-lavender/5 to-lavender/10",
-    },
-    {
-      icon: Brain,
-      title: "Evaluare psihologică",
-      description:
-        "Evaluări comprehensive utilizând instrumente validate pentru diagnostic precis și planificare terapeutică individualizată.",
-      price: "350",
-      duration: "90-120 min",
-      badge: "Comprehensiv",
-      badgeColor: "bg-primary/10 text-primary",
-      benefits: [
-        "Instrumente validate",
-        "Raport detaliat",
-        "Recomandări personalizate",
-      ],
-      gradient: "from-primary/5 to-primary/10",
-    },
-    {
-      icon: Smile,
-      title: "Workshop-uri de grup",
-      description:
-        "Sesiuni interactive de grup pentru mindfulness, management stress, comunicare și dezvoltare personală.",
-      price: "La cerere",
-      duration: "120 min",
-      badge: "Interactiv",
-      badgeColor: "bg-secondary/20 text-secondary-foreground",
-      benefits: [
-        "Învățare colectivă",
-        "Practici interactive",
-        "Suport continuu",
-      ],
-      gradient: "from-secondary/5 to-secondary/10",
+      badge: "Specializare",
     },
   ];
 
+  const packages = [
+    {
+      title: "Pachet Starter",
+      sessions: "5 ședințe",
+      price: "1.150",
+      originalPrice: "1.250",
+      discount: "8%",
+      features: [
+        "Economisești 100 RON",
+        "Valabil 2 luni",
+        "Flexibilitate programare"
+      ]
+    },
+    {
+      title: "Pachet Intensiv",
+      sessions: "10 ședințe",
+      price: "2.150",
+      originalPrice: "2.500",
+      discount: "14%",
+      features: [
+        "Economisești 350 RON",
+        "Valabil 4 luni",
+        "Prioritate la programări"
+      ],
+      popular: true
+    }
+  ];
+
   return (
-    <section id="services" className="section-padding bg-muted/30">
-      <div className="container-custom">
+    <section id="services" className="relative py-20 overflow-hidden bg-gradient-to-b from-background via-[#f8f6f3] to-background">
+      {/* Decorative background */}
+      <div className="absolute top-0 right-0 w-1/3 h-96 opacity-20 pointer-events-none">
+        <img src={therapyAbstract} alt="" className="w-full h-full object-cover" />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 animate-fade-in">
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">
-            Servicii
-          </span>
-          <h2 className="text-4xl md:text-5xl font-serif text-foreground mt-3 mb-6">
-            Tipuri de consultații și tarife
+          <p className="text-sm uppercase tracking-wider text-muted-foreground mb-4">
+            SERVICII ȘI TARIFE
+          </p>
+          <h2 className="text-5xl md:text-6xl font-serif text-foreground mb-6 leading-tight">
+            Tipuri de <span className="text-primary italic">consultații</span>
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Oferim o gamă variată de servicii psihologice adaptate nevoilor tale.
-            Prima consultație include evaluare inițială și stabilirea planului terapeutic.
+          <p className="text-lg text-muted-foreground leading-relaxed">
+            Fiecare ședință este personalizată în funcție de nevoile tale. 
+            Oferim flexibilitate și suport continuu pe parcursul călătoriei tale de transformare.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {/* Services Grid */}
+        <div className="grid md:grid-cols-2 gap-8 mb-16 max-w-6xl mx-auto">
           {services.map((service, index) => (
-            <Card
+            <div
               key={index}
-              className={`hover-lift bg-gradient-to-br ${service.gradient} border-border animate-slide-up overflow-hidden relative group`}
+              className="group bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-border/50 hover-lift"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              {/* Decorative corner element */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors" />
-              
-              <CardHeader className="relative">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-16 h-16 rounded-2xl bg-white/80 shadow-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <service.icon className="w-8 h-8 text-primary" />
-                  </div>
-                  <Badge className={`${service.badgeColor} border-0`}>
+              <CardHeader className="p-8">
+                {/* Badge */}
+                {service.badge && (
+                  <Badge className="mb-4 bg-primary/10 text-primary border-0 w-fit">
+                    <Sparkles className="w-3 h-3 mr-1" />
                     {service.badge}
                   </Badge>
-                </div>
-                
-                <CardTitle className="text-2xl font-serif mb-3 group-hover:text-primary transition-colors">
-                  {service.title}
-                </CardTitle>
-                
-                <CardDescription className="text-base leading-relaxed min-h-[80px]">
-                  {service.description}
-                </CardDescription>
+                )}
 
-                {/* Benefits list */}
-                <div className="mt-4 space-y-2">
-                  {service.benefits.map((benefit, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
-                      <span>{benefit}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardHeader>
-
-              <CardContent className="relative">
-                <div className="flex items-baseline justify-between p-4 bg-white/50 rounded-xl">
-                  <div>
-                    <div className="flex items-baseline gap-2">
-                      {service.price !== "La cerere" && (
-                        <>
-                          <span className="text-3xl font-bold text-primary">{service.price}</span>
-                          <span className="text-lg text-muted-foreground">RON</span>
-                        </>
-                      )}
-                      {service.price === "La cerere" && (
-                        <span className="text-2xl font-bold text-primary">{service.price}</span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-1.5 mt-1 text-sm text-muted-foreground">
+                {/* Icon and Title */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 group-hover:bg-primary/20 transition-all">
+                    <service.icon className="w-7 h-7 text-primary" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-serif text-foreground mb-2 group-hover:text-primary transition-colors">
+                      {service.title}
+                    </h3>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
                       <Clock className="w-4 h-4" />
                       <span>{service.duration}</span>
                     </div>
                   </div>
-                  
-                  {service.price !== "La cerere" && (
-                    <div className="text-right">
-                      <div className="text-xs text-muted-foreground">per ședință</div>
-                    </div>
-                  )}
                 </div>
-              </CardContent>
-            </Card>
+
+                {/* Description */}
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  {service.description}
+                </p>
+
+                {/* Highlights */}
+                <div className="space-y-2.5 mb-6">
+                  {service.highlights.map((highlight, idx) => (
+                    <div key={idx} className="flex items-center gap-3">
+                      <CheckCircle2 className="w-4 h-4 text-primary flex-shrink-0" />
+                      <span className="text-sm text-muted-foreground">{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Price */}
+                <div className="pt-6 border-t border-border/50 flex items-center justify-between">
+                  <div>
+                    <div className="flex items-baseline gap-2">
+                      <span className="text-4xl font-bold text-primary">{service.price}</span>
+                      <span className="text-lg text-muted-foreground">RON</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">per ședință</p>
+                  </div>
+                  <Button 
+                    onClick={scrollToContact}
+                    className="bg-primary hover:bg-primary/90"
+                  >
+                    Programează-te
+                  </Button>
+                </div>
+              </CardHeader>
+            </div>
           ))}
         </div>
 
-        {/* Additional info cards */}
-        <div className="mt-12 grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div className="p-6 bg-card rounded-2xl border border-border text-center hover-lift">
-            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-              <TrendingUp className="w-6 h-6 text-primary" />
+        {/* Packages Section */}
+        <div className="max-w-5xl mx-auto mb-16">
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-4">
+              <Award className="w-5 h-5" />
+              <span className="font-medium">Oferte speciale</span>
             </div>
-            <h3 className="font-semibold text-foreground mb-2">Prima ședință</h3>
+            <h3 className="text-3xl md:text-4xl font-serif text-foreground mb-4">
+              Pachete de ședințe
+            </h3>
+            <p className="text-muted-foreground">
+              Economisește și asigură-ți continuitatea în terapie cu pachetele noastre avantajoase
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {packages.map((pkg, index) => (
+              <Card
+                key={index}
+                className={`relative overflow-hidden border-2 hover-lift ${
+                  pkg.popular ? "border-primary shadow-2xl scale-105" : "border-border"
+                }`}
+              >
+                {pkg.popular && (
+                  <div className="absolute top-0 right-0 bg-primary text-primary-foreground px-4 py-1 text-sm font-medium">
+                    Cel mai avantajos
+                  </div>
+                )}
+
+                <CardHeader className="p-8">
+                  <h4 className="text-2xl font-serif text-foreground mb-2">{pkg.title}</h4>
+                  <p className="text-muted-foreground mb-6">{pkg.sessions}</p>
+
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-2 mb-2">
+                      <span className="text-5xl font-bold text-primary">{pkg.price}</span>
+                      <span className="text-xl text-muted-foreground">RON</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm text-muted-foreground line-through">
+                        {pkg.originalPrice} RON
+                      </span>
+                      <Badge className="bg-green-500/10 text-green-700 border-0">
+                        Economisești {pkg.discount}
+                      </Badge>
+                    </div>
+                  </div>
+
+                  <div className="space-y-3 mb-6">
+                    {pkg.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
+                        <span className="text-muted-foreground">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button 
+                    onClick={scrollToContact}
+                    className={pkg.popular ? "w-full bg-primary hover:bg-primary/90" : "w-full"}
+                    variant={pkg.popular ? "default" : "outline"}
+                  >
+                    Alege acest pachet
+                  </Button>
+                </CardHeader>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        {/* Additional Info */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="text-center p-6 bg-white rounded-2xl border border-border/50 hover-lift">
+            <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+              <Calendar className="w-6 h-6 text-primary" />
+            </div>
+            <h4 className="font-semibold text-foreground mb-2">Prima ședință</h4>
             <p className="text-sm text-muted-foreground">
               Include evaluare completă și stabilirea planului terapeutic personalizat
             </p>
           </div>
 
-          <div className="p-6 bg-card rounded-2xl border border-border text-center hover-lift">
+          <div className="text-center p-6 bg-white rounded-2xl border border-border/50 hover-lift">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <Clock className="w-6 h-6 text-primary" />
             </div>
-            <h3 className="font-semibold text-foreground mb-2">Programări urgente</h3>
+            <h4 className="font-semibold text-foreground mb-2">Programări urgente</h4>
             <p className="text-sm text-muted-foreground">
-              Oferim disponibilitate pentru situații care necesită intervenție rapidă
+              Disponibilitate pentru situații care necesită intervenție rapidă
             </p>
           </div>
 
-          <div className="p-6 bg-card rounded-2xl border border-border text-center hover-lift">
+          <div className="text-center p-6 bg-white rounded-2xl border border-border/50 hover-lift">
             <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
               <CheckCircle2 className="w-6 h-6 text-primary" />
             </div>
-            <h3 className="font-semibold text-foreground mb-2">Pachete de ședințe</h3>
+            <h4 className="font-semibold text-foreground mb-2">Confidențialitate</h4>
             <p className="text-sm text-muted-foreground">
-              Tarife speciale disponibile pentru pachete de 5 sau 10 ședințe
+              Toate ședințele sunt strict confidențiale conform codului deontologic
             </p>
           </div>
         </div>
